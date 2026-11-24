@@ -1,0 +1,218 @@
+=== run 2026-11-23 18:12 | device cuda | torch 2.11.0+cu128 | epochs 40
+preprocessed 10261 images in 0s
+
+--- protocol paper | seed 0
+          set  images  glioma  meningioma  notumor  pituitary
+        train    5598    1440        1278     1440       1440
+          val     700     180         160      180        180
+         test     699     180         159      180        180
+test_leakfree     367     133         116       21         97
+       d2_all    3264     926         937      500        901
+    d2_unseen     653     494          89       23         47
+baseline: filters [8, 16, 32, 64, 128, 256], 790,356 parameters
+  epoch  1/40 loss 0.9097 train 0.6165 val 0.5443 (8s)
+  epoch 10/40 loss 0.1311 train 0.9518 val 0.7357 (81s)
+  epoch 20/40 loss 0.0533 train 0.9820 val 0.4843 (172s)
+  epoch 30/40 loss 0.0203 train 0.9920 val 0.7629 (249s)
+  epoch 40/40 loss 0.0299 train 0.9900 val 0.9457 (325s)
+  test           n= 699 acc 0.9399 f1 0.9384
+  test_leakfree  n= 367 acc 0.9074 f1 0.9033
+  d2_all         n=3264 acc 0.9648 f1 0.9673
+  d2_unseen      n= 653 acc 0.8560 f1 0.8168
+relevance m_l: [0.0002, 0.00015, 0.00142, 0.00581, 0.02309, 0.15734] | tau(p=25) = 0.00050901 | keep blocks [2, 3, 4, 5]
+refined: filters [32, 64, 128, 256], 785,220 parameters
+  epoch  1/40 loss 0.8706 train 0.6451 val 0.5386 (27s)
+  epoch 10/40 loss 0.1865 train 0.9268 val 0.7857 (254s)
+  epoch 20/40 loss 0.0506 train 0.9812 val 0.9371 (505s)
+  epoch 30/40 loss 0.0194 train 0.9936 val 0.9086 (756s)
+  epoch 40/40 loss 0.0247 train 0.9914 val 0.8929 (1005s)
+  test           n= 699 acc 0.9499 f1 0.9490
+  test_leakfree  n= 367 acc 0.9237 f1 0.9024
+  d2_all         n=3264 acc 0.9706 f1 0.9712
+  d2_unseen      n= 653 acc 0.8897 f1 0.8183
+explanation panel failed: TypeError("LimeImageExplainer.explain_instance() got an unexpected keyword argument 'progress_bar'")
+
+--- protocol paper | seed 1
+          set  images  glioma  meningioma  notumor  pituitary
+        train    5598    1440        1278     1440       1440
+          val     700     180         160      180        180
+         test     699     180         159      180        180
+test_leakfree     363     130         107       24        102
+       d2_all    3264     926         937      500        901
+    d2_unseen     655     498          68       35         54
+baseline: filters [8, 16, 32, 64, 128, 256], 790,356 parameters
+  epoch  1/40 loss 0.8692 train 0.6451 val 0.4857 (8s)
+  epoch 10/40 loss 0.1604 train 0.9443 val 0.5200 (77s)
+  epoch 20/40 loss 0.0614 train 0.9782 val 0.8529 (153s)
+  epoch 30/40 loss 0.0196 train 0.9925 val 0.9014 (230s)
+  epoch 40/40 loss 0.0281 train 0.9904 val 0.9086 (308s)
+  test           n= 699 acc 0.9499 f1 0.9490
+  test_leakfree  n= 363 acc 0.9284 f1 0.9295
+  d2_all         n=3264 acc 0.9439 f1 0.9471
+  d2_unseen      n= 655 acc 0.7954 f1 0.7671
+relevance m_l: [8e-05, 0.00024, 0.0009, 0.00738, 0.03202, 0.19326] | tau(p=25) = 0.00040708 | keep blocks [2, 3, 4, 5]
+refined: filters [32, 64, 128, 256], 785,220 parameters
+  epoch  1/40 loss 0.8816 train 0.6338 val 0.4714 (25s)
+  epoch 10/40 loss 0.2487 train 0.9060 val 0.7929 (253s)
+  epoch 20/40 loss 0.0776 train 0.9734 val 0.8600 (531s)
+  epoch 30/40 loss 0.0274 train 0.9925 val 0.9686 (1301s)
+  epoch 40/40 loss 0.0276 train 0.9921 val 0.9586 (2144s)
+  test           n= 699 acc 0.9571 f1 0.9559
+  test_leakfree  n= 363 acc 0.9284 f1 0.9166
+  d2_all         n=3264 acc 0.9681 f1 0.9696
+  d2_unseen      n= 655 acc 0.8809 f1 0.8470
+
+--- protocol paper | seed 2
+          set  images  glioma  meningioma  notumor  pituitary
+        train    5598    1440        1278     1440       1440
+          val     700     180         160      180        180
+         test     699     180         159      180        180
+test_leakfree     368     139          91       24        114
+       d2_all    3264     926         937      500        901
+    d2_unseen     656     502          64       33         57
+baseline: filters [8, 16, 32, 64, 128, 256], 790,356 parameters
+  epoch  1/40 loss 0.8874 train 0.6145 val 0.2629 (24s)
+  epoch 10/40 loss 0.1228 train 0.9580 val 0.7786 (256s)
+  epoch 20/40 loss 0.0410 train 0.9870 val 0.9414 (518s)
+  epoch 30/40 loss 0.0522 train 0.9837 val 0.9057 (773s)
+  epoch 40/40 loss 0.0305 train 0.9907 val 0.9000 (1026s)
+  test           n= 699 acc 0.9399 f1 0.9390
+  test_leakfree  n= 368 acc 0.9103 f1 0.8841
+  d2_all         n=3264 acc 0.9369 f1 0.9407
+  d2_unseen      n= 656 acc 0.7546 f1 0.7364
+relevance m_l: [3e-05, 0.00018, 0.00078, 0.00397, 0.01653, 0.10712] | tau(p=25) = 0.00033237 | keep blocks [2, 3, 4, 5]
+refined: filters [32, 64, 128, 256], 785,220 parameters
+  epoch  1/40 loss 0.9104 train 0.6183 val 0.4343 (86s)
+=== run 2026-11-24 10:16 | device cuda | torch 2.11.0+cu128 | epochs 40
+preprocessed 10261 images in 1s
+
+--- protocol paper | seed 0
+          set  images  glioma  meningioma  notumor  pituitary
+        train    5598    1440        1278     1440       1440
+          val     700     180         160      180        180
+         test     699     180         159      180        180
+test_leakfree     367     133         116       21         97
+       d2_all    3264     926         937      500        901
+    d2_unseen     653     494          89       23         47
+relevance m_l: [0.0002, 0.00015, 0.00142, 0.00581, 0.02309, 0.15734] | tau(p=25) = 0.00050901 | keep blocks [2, 3, 4, 5]
+
+--- protocol paper | seed 1
+          set  images  glioma  meningioma  notumor  pituitary
+        train    5598    1440        1278     1440       1440
+          val     700     180         160      180        180
+         test     699     180         159      180        180
+test_leakfree     363     130         107       24        102
+       d2_all    3264     926         937      500        901
+    d2_unseen     655     498          68       35         54
+relevance m_l: [8e-05, 0.00024, 0.0009, 0.00738, 0.03202, 0.19326] | tau(p=25) = 0.00040708 | keep blocks [2, 3, 4, 5]
+
+--- protocol paper | seed 2
+          set  images  glioma  meningioma  notumor  pituitary
+        train    5598    1440        1278     1440       1440
+          val     700     180         160      180        180
+         test     699     180         159      180        180
+test_leakfree     368     139          91       24        114
+       d2_all    3264     926         937      500        901
+    d2_unseen     656     502          64       33         57
+relevance m_l: [3e-05, 0.00018, 0.00078, 0.00397, 0.01653, 0.10712] | tau(p=25) = 0.00033237 | keep blocks [2, 3, 4, 5]
+refined: filters [32, 64, 128, 256], 785,220 parameters
+  epoch  1/40 loss 0.9190 train 0.6034 val 0.3086 (26s)
+  epoch 10/40 loss 0.3000 train 0.8832 val 0.7314 (263s)
+  epoch 20/40 loss 0.1256 train 0.9543 val 0.6100 (521s)
+  epoch 30/40 loss 0.0613 train 0.9782 val 0.9057 (788s)
+  epoch 40/40 loss 0.0453 train 0.9836 val 0.6543 (1051s)
+  test           n= 699 acc 0.9299 f1 0.9298
+  test_leakfree  n= 368 acc 0.8995 f1 0.8724
+  d2_all         n=3264 acc 0.9485 f1 0.9499
+  d2_unseen      n= 656 acc 0.8369 f1 0.7911
+
+--- protocol clean | seed 0
+          set  images  glioma  meningioma  notumor  pituitary
+        train    5596    1439        1279     1439       1439
+          val     696     180         157      179        180
+         test     705     181         161      182        181
+test_leakfree     705     181         161      182        181
+       d2_all    3264     926         937      500        901
+    d2_unseen     787     498         119       77         93
+baseline: filters [8, 16, 32, 64, 128, 256], 790,356 parameters
+  epoch  1/40 loss 0.9194 train 0.6090 val 0.2672 (8s)
+  epoch 10/40 loss 0.1966 train 0.9305 val 0.4684 (80s)
+  epoch 20/40 loss 0.0670 train 0.9759 val 0.5158 (163s)
+  epoch 30/40 loss 0.0222 train 0.9912 val 0.7931 (246s)
+  epoch 40/40 loss 0.0461 train 0.9850 val 0.4066 (328s)
+  test           n= 705 acc 0.9007 f1 0.8974
+  test_leakfree  n= 705 acc 0.9007 f1 0.8974
+  d2_all         n=3264 acc 0.9445 f1 0.9464
+  d2_unseen      n= 787 acc 0.8539 f1 0.8254
+relevance m_l: [6e-05, 0.00042, 0.00148, 0.00708, 0.03797, 0.21621] | tau(p=25) = 0.0006808 | keep blocks [2, 3, 4, 5]
+refined: filters [32, 64, 128, 256], 785,220 parameters
+  epoch  1/40 loss 0.8999 train 0.6249 val 0.5560 (25s)
+  epoch 10/40 loss 0.1790 train 0.9362 val 0.6796 (255s)
+  epoch 20/40 loss 0.0473 train 0.9843 val 0.8822 (521s)
+  epoch 30/40 loss 0.0331 train 0.9900 val 0.9080 (774s)
+  epoch 40/40 loss 0.0200 train 0.9943 val 0.8937 (1027s)
+  test           n= 705 acc 0.9234 f1 0.9204
+  test_leakfree  n= 705 acc 0.9234 f1 0.9204
+  d2_all         n=3264 acc 0.9513 f1 0.9519
+  d2_unseen      n= 787 acc 0.8818 f1 0.8535
+
+--- protocol clean | seed 1
+          set  images  glioma  meningioma  notumor  pituitary
+        train    5596    1439        1279     1439       1439
+          val     696     180         157      179        180
+         test     705     181         161      182        181
+test_leakfree     705     181         161      182        181
+       d2_all    3264     926         937      500        901
+    d2_unseen     787     498         119       77         93
+baseline: filters [8, 16, 32, 64, 128, 256], 790,356 parameters
+  epoch  1/40 loss 0.8961 train 0.6210 val 0.4066 (8s)
+  epoch 10/40 loss 0.1360 train 0.9509 val 0.3290 (90s)
+  epoch 20/40 loss 0.0410 train 0.9864 val 0.5402 (180s)
+  epoch 30/40 loss 0.0357 train 0.9880 val 0.8693 (275s)
+  epoch 40/40 loss 0.0290 train 0.9914 val 0.8017 (365s)
+  test           n= 705 acc 0.8879 f1 0.8854
+  test_leakfree  n= 705 acc 0.8879 f1 0.8854
+  d2_all         n=3264 acc 0.9455 f1 0.9439
+  d2_unseen      n= 787 acc 0.8475 f1 0.8068
+relevance m_l: [2e-05, 0.00015, 0.0009, 0.00448, 0.01587, 0.15918] | tau(p=25) = 0.00033475 | keep blocks [2, 3, 4, 5]
+refined: filters [32, 64, 128, 256], 785,220 parameters
+  epoch  1/40 loss 0.9184 train 0.6138 val 0.2773 (26s)
+  epoch 10/40 loss 0.2367 train 0.9121 val 0.6566 (16896s)
+  epoch 20/40 loss 0.0723 train 0.9741 val 0.8089 (17167s)
+  epoch 30/40 loss 0.0280 train 0.9916 val 0.9124 (17454s)
+  epoch 40/40 loss 0.0335 train 0.9891 val 0.9210 (17787s)
+  test           n= 705 acc 0.9163 f1 0.9136
+  test_leakfree  n= 705 acc 0.9163 f1 0.9136
+  d2_all         n=3264 acc 0.9528 f1 0.9537
+  d2_unseen      n= 787 acc 0.8729 f1 0.8422
+
+--- protocol clean | seed 2
+          set  images  glioma  meningioma  notumor  pituitary
+        train    5596    1439        1279     1439       1439
+          val     696     180         157      179        180
+         test     705     181         161      182        181
+test_leakfree     705     181         161      182        181
+       d2_all    3264     926         937      500        901
+    d2_unseen     787     498         119       77         93
+baseline: filters [8, 16, 32, 64, 128, 256], 790,356 parameters
+  epoch  1/40 loss 0.8828 train 0.6272 val 0.5086 (17s)
+  epoch 10/40 loss 0.1144 train 0.9575 val 0.6782 (155s)
+  epoch 20/40 loss 0.0534 train 0.9830 val 0.8391 (310s)
+  epoch 30/40 loss 0.0461 train 0.9816 val 0.9023 (455s)
+  epoch 40/40 loss 0.0447 train 0.9861 val 0.6925 (567s)
+  test           n= 705 acc 0.9206 f1 0.9201
+  test_leakfree  n= 705 acc 0.9206 f1 0.9201
+  d2_all         n=3264 acc 0.9265 f1 0.9294
+  d2_unseen      n= 787 acc 0.7916 f1 0.7926
+relevance m_l: [3e-05, 0.00025, 0.00119, 0.00472, 0.0255, 0.1373] | tau(p=25) = 0.00048527 | keep blocks [2, 3, 4, 5]
+refined: filters [32, 64, 128, 256], 785,220 parameters
+  epoch  1/40 loss 0.9002 train 0.6269 val 0.2572 (26s)
+  epoch 10/40 loss 0.2457 train 0.9037 val 0.7284 (259s)
+  epoch 20/40 loss 0.0768 train 0.9734 val 0.9138 (517s)
+  epoch 30/40 loss 0.0353 train 0.9878 val 0.9325 (774s)
+  epoch 40/40 loss 0.0332 train 0.9887 val 0.8721 (1030s)
+  test           n= 705 acc 0.9262 f1 0.9255
+  test_leakfree  n= 705 acc 0.9262 f1 0.9255
+  d2_all         n=3264 acc 0.9433 f1 0.9437
+  d2_unseen      n= 787 acc 0.8323 f1 0.8166
+done

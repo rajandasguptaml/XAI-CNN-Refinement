@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xairefine"
+version = "0.1.0"
+description = "Explainability-driven CNN refinement for brain tumor classification in MRI (BIC 2026)"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "Rajan Das Gupta" }]
+
+[project.urls]
+Homepage = "https://rajandasguptaml.github.io/xai-cnn-refinement/"
+Repository = "https://github.com/rajandasguptaml/xai-cnn-refinement"
+Paper = "https://doi.org/10.1145/3809986.3810119"
+
+[tool.setuptools.packages.find]
+include = ["xairefine*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

@@ -1,0 +1,65 @@
+cff-version: 1.2.0
+message: "If you use this code or the leak-free evaluation, please cite the BIC 2026 paper below."
+type: software
+title: "From Explanations to Architecture: Explainability-Driven CNN Refinement for Brain Tumor Classification in MRI"
+authors:
+  - family-names: "Das Gupta"
+    given-names: "Rajan"
+    affiliation: "American International University-Bangladesh"
+    orcid: "https://orcid.org/0000-0003-4065-743X"
+  - family-names: "Showmick"
+    given-names: "Md Imrul Hasan"
+    affiliation: "Brac University"
+  - family-names: "Wei"
+    given-names: "Lei"
+    affiliation: "Shinawatra University"
+  - family-names: "Abir"
+    given-names: "Mushfiqur Rahman"
+    affiliation: "American International University-Bangladesh"
+  - family-names: "Akter"
+    given-names: "Shanjida"
+    affiliation: "North South University"
+  - family-names: "Rahat"
+    given-names: "Md. Yeasin"
+    affiliation: "American International University-Bangladesh"
+  - family-names: "Hossen"
+    given-names: "Md. Jakir"
+    affiliation: "Multimedia University"
+repository-code: "https://github.com/rajandasguptaml/xai-cnn-refinement"
+url: "https://rajandasguptaml.github.io/xai-cnn-refinement/"
+license: MIT
+keywords:
+  - brain tumor classification
+  - MRI
+  - explainable AI
+  - Grad-CAM
+  - SHAP
+  - LIME
+  - model pruning
+  - data leakage
+preferred-citation:
+  type: conference-paper
+  title: "From Explanations to Architecture: Explainability-Driven CNN Refinement for Brain Tumor Classification in MRI"
+  authors:
+    - family-names: "Das Gupta"
+      given-names: "Rajan"
+    - family-names: "Showmick"
+      given-names: "Md Imrul Hasan"
+    - family-names: "Wei"
+      given-names: "Lei"
+    - family-names: "Abir"
+      given-names: "Mushfiqur Rahman"
+    - family-names: "Akter"
+      given-names: "Shanjida"
+    - family-names: "Rahat"
+      given-names: "Md. Yeasin"
+    - family-names: "Hossen"
+      given-names: "Md. Jakir"
+  collection-title: "Proceedings of the 2026 6th International Conference on Bioinformatics and Intelligent Computing"
+  publisher:
+    name: "ACM"
+  year: 2026
+  start: 853
+  end: 860
+  doi: "10.1145/3809986.3810119"
+  url: "https://arxiv.org/abs/2506.09161"

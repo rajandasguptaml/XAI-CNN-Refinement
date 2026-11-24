@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explainability-Driven CNN Refinement</title>
+<meta name="description" content="From Explanations to Architecture (BIC 2026): Grad-CAM-guided CNN refinement for brain tumor MRI, with a leak-free re-evaluation. Paper, code, data card, results.">
+<meta property="og:title" content="From Explanations to Architecture: Explainability-Driven CNN Refinement for Brain Tumor Classification in MRI">
+<meta property="og:description" content="BIC 2026. Grad-CAM relevance guides layer removal; re-evaluated on leak-free splits of two overlapping Kaggle MRI datasets.">
+<meta property="og:image" content="https://rajandasguptaml.github.io/xai-cnn-refinement/static/fig_accuracy.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%A0%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1b1f24; --muted:#5b6471; --line:#e3e6ea; --card:#f6f8fa; --accent:#1f5fbf; --accent-2:#0b7a4b;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ --bg:#0f1218; --fg:#e8ebf0; --muted:#9aa4b2; --line:#262c36; --card:#161b23; --accent:#7fb0ff; --accent-2:#5fd49a; }
+  }
+  :root[data-theme="dark"]{ --bg:#0f1218; --fg:#e8ebf0; --muted:#9aa4b2; --line:#262c36; --card:#161b23; --accent:#7fb0ff; --accent-2:#5fd49a; }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  main{max-width:960px;margin:0 auto;padding:0 16px 64px}
+  header{text-align:center;padding:56px 0 24px}
+  h1{font-size:clamp(1.6rem,3.6vw,2.5rem);line-height:1.2;margin:0 0 8px;letter-spacing:-0.01em}
+  .sub{color:var(--muted);font-size:1.05rem;margin:0 0 18px}
+  .authors{font-size:1.05rem;margin:0 0 6px}
+  .authors a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line)}
+  .authors a:hover{border-color:var(--accent)}
+  sup{font-size:.7em;color:var(--muted)}
+  .affil{color:var(--muted);font-size:.95rem;margin:0 0 6px}
+  .venue{display:inline-block;margin:12px 0 18px;padding:6px 14px;border:1px solid var(--line);border-radius:999px;font-weight:600;background:var(--card)}
+  .links{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:var(--fg);color:var(--bg);text-decoration:none;font-weight:600;font-size:.95rem}
+  .btn:hover{opacity:.88}
+  .btn.alt{background:var(--card);color:var(--fg);border:1px solid var(--line)}
+  figure{margin:36px 0 0}
+  figure img{width:100%;height:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+  figcaption{color:var(--muted);font-size:.95rem;margin-top:10px}
+  section{margin-top:44px}
+  h2{font-size:1.45rem;margin:0 0 14px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+  h3{font-size:1.1rem;margin:0 0 6px}
+  p{margin:0 0 12px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:0 0 18px}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;text-align:center}
+  .tile .n{font-size:2rem;font-weight:700;color:var(--accent-2);line-height:1.1}
+  .tile .l{color:var(--muted);font-size:.9rem;margin-top:4px}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+  table{border-collapse:collapse;width:100%;min-width:760px;font-size:.92rem}
+  th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+  th:first-child,td:first-child{text-align:left}
+  thead th{background:var(--card);position:sticky;top:0}
+  tr.ours td{font-weight:700;background:color-mix(in srgb,var(--accent-2) 12%,transparent)}
+  .note{color:var(--muted);font-size:.9rem;margin-top:8px}
+  pre{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto;font:.86rem/1.5 var(--mono);margin:0}
+  code{font-family:var(--mono);font-size:.92em}
+  .copy{float:right;margin:-4px 0 8px 8px;padding:5px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);cursor:pointer;font-size:.85rem}
+  footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem;text-align:center}
+  footer a{color:inherit}
+  section a{color:var(--accent)}
+</style>
+
+</head>
+<body>
+<main>
+  <header>
+    <h1>From Explanations to Architecture: Explainability-Driven CNN Refinement for Brain Tumor Classification in MRI</h1>
+    <p class="sub">Grad-CAM relevance as a design signal, re-evaluated on leak-free splits</p>
+    <p class="authors"><a href="https://rajandasguptaml.github.io/">Rajan Das Gupta</a><sup>1</sup> · Md Imrul Hasan Showmick<sup>2</sup> · Lei Wei<sup>3,†</sup> · Mushfiqur Rahman Abir<sup>1</sup> · Shanjida Akter<sup>4</sup> · Md. Yeasin Rahat<sup>1</sup> · Md. Jakir Hossen<sup>5</sup></p>
+    <p class="affil"><sup>1</sup>American International University-Bangladesh &nbsp; <sup>2</sup>Brac University &nbsp; <sup>3</sup>Shinawatra University &nbsp; <sup>4</sup>North South University &nbsp; <sup>5</sup>Multimedia University</p>
+    <p class="affil"><sup>†</sup>Corresponding author</p>
+    <div class="venue">BIC 2026 · 6th International Conference on Bioinformatics and Intelligent Computing · ACM</div>
+    <div class="links">
+      <a class="btn" href="https://doi.org/10.1145/3809986.3810119">Paper (ACM DL)</a>
+      <a class="btn" href="https://arxiv.org/abs/2506.09161">arXiv</a>
+      <a class="btn" href="https://github.com/rajandasguptaml/xai-cnn-refinement">Code</a>
+      <a class="btn alt" href="https://github.com/rajandasguptaml/xai-cnn-refinement/blob/main/data/README.md">Data card</a>
+      <a class="btn alt" href="https://www.kaggle.com/datasets/rajandasguptaml/brain-tumor-mri-duplicate-and-leakage-audit">Duplicate audit</a>
+      <a class="btn alt" href="#bibtex">BibTeX</a>
+    </div>
+    <figure><img src="static/fig_accuracy.png" alt="Accuracy of the baseline and refined models on full and unseen test sets under the paper protocol and the leak-free protocol."><figcaption>Accuracy on the full test sets and on the images with no duplicate in training, under the paper's random split and a leak-free group-aware split. Red marks: values reported in the paper.</figcaption></figure>
+  </header>
+  <section id="findings">
+    <h2>Findings</h2>
+    <ul><li>Refinement adds about 0.2 points on the paper's protocol. Dataset-1 test accuracy goes from 94.3% to 94.6% (mean of 3 seeds); the paper reports 97.10% to 98.21% with its TensorFlow implementation.</li><li>Duplicates inflate the cross-dataset score. On all of Dataset-2 the refined model scores 96.2%; on the 653 Dataset-2 images that have no copy in the training data it scores 86.9% ± 2.8, about 9 points lower.</li><li>On those unseen images, refinement helps most: 80.2% ± 5.1 for the baseline against 86.9% ± 2.8 for the refined model (macro F1 77.3 against 81.9). This subset is mostly glioma, so macro F1 is the fairer summary.</li><li>On the leak-free protocol (group-aware split; no duplicate straddles train and test), Dataset-1 accuracy is 90.3% for the baseline and 92.2% for the refined model.</li><li>Unseen Dataset-2 images under the leak-free protocol (787): 83.1% baseline and 86.2% refined (macro F1 80.8 and 83.7).</li><li>The refined model is not lighter. Grad-CAM relevance (Eq. 4) grows with depth in every run, so the rule removes the earliest blocks (kept blocks: [2, 3, 4, 5]). Parameters go from 790,356 to 785,220, and because the first remaining layer runs at full resolution, the refined model is several times slower to train and to run (timings on our shared machine are only indicative). The paper's own timings (10 ms to 11 ms per image) point the same way.</li></ul>
+  </section>
+  <section id="results">
+    <h2>Results</h2>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Protocol</th><th>Model</th><th>D1 test, full</th><th>D1 test, unseen</th><th>D2, full</th><th>D2, unseen</th></tr></thead>
+      <tbody>
+<tr><td>paper</td><td>baseline</td><td>94.3 ± 0.6</td><td>91.5 ± 1.1</td><td>94.9 ± 1.4</td><td>80.2 ± 5.1</td></tr>
+<tr class="ours"><td>paper</td><td>refined</td><td>94.6 ± 1.4</td><td>91.7 ± 1.6</td><td>96.2 ± 1.2</td><td>86.9 ± 2.8</td></tr>
+<tr><td>clean</td><td>baseline</td><td>90.3 ± 1.6</td><td>90.3 ± 1.6</td><td>93.9 ± 1.1</td><td>83.1 ± 3.4</td></tr>
+<tr class="ours"><td>clean</td><td>refined</td><td>92.2 ± 0.5</td><td>92.2 ± 0.5</td><td>94.9 ± 0.5</td><td>86.2 ± 2.6</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Accuracy (%), mean ± SD over seeds 0, 1, 2. "Unseen" removes every test image that has a duplicate (perceptual-hash distance ≤ 4) in the training or validation partition.</p>
+  </section>
+  <section id="method">
+    <h2>Method</h2>
+    <div class="grid">
+      <div class="card"><h3>Relevance per block</h3><p>Grad-CAM is computed at every convolutional block of the trained baseline; the mean heatmap intensity over the validation set is the block's relevance m<sub>l</sub> (Eq. 4).</p></div>
+      <div class="card"><h3>Remove and retrain</h3><p>Blocks whose relevance falls below the 25th percentile are removed, the network is rebuilt from the remaining widths and retrained with the same protocol.</p></div>
+      <div class="card"><h3>Check the explanations</h3><p>Grad-CAM of both models, SHAP and LIME of the refined model, on test images that have no duplicate in the training data.</p></div>
+    </div>
+    <figure><img src="static/relevance.png" alt="Bar chart of Grad-CAM relevance per block on a log scale; the first two blocks fall below the threshold and are removed."><figcaption>Relevance grows with depth, so the rule removes the earliest blocks.</figcaption></figure>
+    <figure><img src="static/explanations.png" alt="For one unseen test image per class: the MRI, Grad-CAM of the baseline and refined models, SHAP and LIME of the refined model."><figcaption>Explanations on unseen test images, one per class. The refined maps are sparser but not consistently on the tumor.</figcaption></figure>
+  </section>
+  <section id="bibtex">
+    <h2>Citation</h2>
+    <button class="copy" onclick="navigator.clipboard.writeText(document.getElementById('bib').innerText).then(()=>{this.textContent='Copied';setTimeout(()=>this.textContent='Copy',1500)})">Copy</button>
+<pre id="bib"><code>@inproceedings{dasgupta2026explanations,
+  title     = {From Explanations to Architecture: Explainability-Driven {CNN} Refinement for Brain Tumor Classification in {MRI}},
+  author    = {Das Gupta, Rajan and Showmick, Md Imrul Hasan and Wei, Lei and Abir, Mushfiqur Rahman and Akter, Shanjida and Rahat, Md. Yeasin and Hossen, Md. Jakir},
+  booktitle = {Proceedings of the 2026 6th International Conference on Bioinformatics and Intelligent Computing (BIC 2026)},
+  publisher = {ACM},
+  year      = {2026},
+  pages     = {853--860},
+  doi       = {10.1145/3809986.3810119},
+  url       = {https://arxiv.org/abs/2506.09161}
+}</code></pre>
+  </section>
+  <footer>
+    <p><a href="https://rajandasguptaml.github.io/">rajandasguptaml.github.io</a> · <a href="https://github.com/rajandasguptaml/xai-cnn-refinement">github.com/rajandasguptaml/xai-cnn-refinement</a></p>
+  </footer>
+</main>
+</body>
+</html>

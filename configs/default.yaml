@@ -1,0 +1,17 @@
+# Settings of the paper (Table 3) plus the evaluation protocols of this repository.
+data:
+  index_csv: data/image_index.csv          # per-image table with duplicate groups and the clean split
+  image_root: data/images                  # contains msoud/{Training,Testing} and sartaj/{Training,Testing}
+cache_dir: outputs/cache
+out_dir: results
+protocols: [paper, clean]                  # paper: random 80/10/10; clean: group-aware 80/10/10
+seeds: [0, 1, 2]
+model:
+  filters: [8, 16, 32, 64, 128, 256]
+refine:
+  percentile: 25                           # tau = 25th percentile of m_l (Eq. 5)
+  min_keep: 2
+train:
+  epochs: 40
+  batch_size: 40
+  lr: 0.001
